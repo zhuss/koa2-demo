@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>demo</title>
+    <style>
+        .p{
+            height: 20px;
+        }
+    </style>
+    <script src="../js/vue.min.js"></script>
+    <script src="../js/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p class="p">{{message}}</p>
+        <p class="p">{{user.name}}</p>
+        <p class="p">{{user.age}}</p>
+        <button @click="getBtnClick">get</button>
+        <button @click="listBtnClick">list</button>
+    </div>
+    <script src="../js/api.js"></script>
+    <script>
+        var vue = new Vue({
+            el: "#app",
+            data:{
+                message:"Hello Koa 2!",
+                user:{
+                    name:"",
+                    age:""
+                }
+            },
+            methods:{
+                getBtnClick(){
+                    api.getUser("/users/get",{
+                        account:13250801281
+                    }).then(res => {
+                        if(res.code == 200){
+                            console.log(res.data);
+                        }
+                    });
+                },
+                listBtnClick(){
+                    // axios.post("/users/list").then(res => {
+                    //     console.log(res);
+                    // });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
